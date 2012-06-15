@@ -21,23 +21,6 @@ module CommonEngine
   			@lib_name = options[:lib_name]
   		end
 
-#   		def additional_tweaks
-#   		return unless File.exists? 'public/robots.txt' 
-#   			append_file "public/robots.txt", <<- ROBOTS			
-# User-agent: *  
-# Disallow: /users
-#   			ROBOTS
-#   			end
-#   		end
-
-  	# def setup_assets
-  	# 	@lib_name = 'common_engine'
-  	# 	%w{javascripts stylesheets images}.each do |path|
-   #      empty_directory "app/assets/#{path}/store"
-   #      empty_directory "app/assets/#{path}/admin"
-   #    end
-  	# end
-
     	def install_migrations
     		say_status :copying, "migrations"
           silence_stream(STDOUT) do
