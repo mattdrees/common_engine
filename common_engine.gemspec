@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "common_engine"
   gem.require_paths = ["lib"]
   gem.version       = CommonEngine::VERSION
+  gem.platform      = Gem::Platform::RUBY
 
   # gem.add_dependency "_gem_name_"
   # gem.add_development_dependency "_gem_name_"

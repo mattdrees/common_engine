@@ -21,14 +21,14 @@ module CommonEngine
   			@lib_name = options[:lib_name]
   		end
 
-  		def additional_tweaks
-  		return unless File.exists? 'public/robots.txt' 
-  			append_file "public/robots.txt", <<- ROBOTS			
-User-agent: * 
-Disallow: /users
-  			ROBOTS
-  			end
-  		end
+#   		def additional_tweaks
+#   		return unless File.exists? 'public/robots.txt' 
+#   			append_file "public/robots.txt", <<- ROBOTS			
+# User-agent: * 
+# Disallow: /users
+#   			ROBOTS
+#   			end
+#   		end
 
   	def setup_assets
   		@lib_name = 'common_engine'
