@@ -1,4 +1,6 @@
 # Alias class for User that matches table name
-class SimplesecuritymanagerUser < User
-  unloadable
+module CommonEngine
+	class SimplesecuritymanagerUser < User
+	  unloadable
+	end
 end

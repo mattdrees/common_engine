@@ -1,3 +1,5 @@
-class Project < Group
-  unloadable
+module CommonEngine
+	class Project < Group
+	  unloadable
+	end
 end

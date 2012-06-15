@@ -1,3 +1,5 @@
-class Aoa < ActiveRecord::Base
-  unloadable
+module CommonEngine
+	class Aoa < ActiveRecord::Base
+	  unloadable
+	end
 end

@@ -1,3 +1,5 @@
-class Spouse < Person
-  unloadable
+module CommonEngine
+	class Spouse < Person
+	  unloadable
+	end
 end

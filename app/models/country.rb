@@ -1,3 +1,5 @@
-class Country < ActiveRecord::Base
-  unloadable
+module CommonEngine
+	class Country < ActiveRecord::Base
+	  unloadable
+	end
 end

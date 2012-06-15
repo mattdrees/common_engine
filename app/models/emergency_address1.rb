@@ -1,3 +1,5 @@
-class EmergencyAddress1 < Address  
-  unloadable
+module CommonEngine
+	class EmergencyAddress1 < Address  
+	  unloadable
+	end
 end

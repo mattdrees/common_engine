@@ -1,3 +1,5 @@
-class PermanentAddress < Address  
-  unloadable
+module CommonEngine
+	class PermanentAddress < Address  
+	  unloadable
+	end
 end

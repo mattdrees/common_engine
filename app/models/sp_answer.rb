@@ -1,3 +1,5 @@
-class SpAnswer < Answer
-  unloadable
+module CommonEngine
+	class SpAnswer < Answer
+	  unloadable
+	end
 end

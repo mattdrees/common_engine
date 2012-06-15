@@ -1,4 +1,6 @@
 # Alias class for Person that matches table name
-class MinistryPerson < Person
-  unloadable
+module CommonEngine
+	class MinistryPerson < Person
+	  unloadable
+	end
 end

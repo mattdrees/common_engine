@@ -1,4 +1,6 @@
 # Alias class for Staff that matches table name
-class MinistryStaff < Staff
-  unloadable
+module CommonEngine
+	class MinistryStaff < Staff
+	  unloadable
+	end
 end

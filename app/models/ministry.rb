@@ -1,3 +1,5 @@
-class Ministry < ActiveRecord::Base
-  unloadable
+module CommonEngine
+	class Ministry < ActiveRecord::Base
+	  unloadable
+	end
 end
