@@ -5,6 +5,7 @@ PATH
       bundler
       highline
       rails
+      thor
 
 GEM
   remote: https://rubygems.org/
@@ -43,7 +44,7 @@ GEM
     highline (1.6.12)
     hike (1.2.1)
     i18n (0.6.0)
-    journey (1.0.3)
+    journey (1.0.4)
     json (1.7.3)
     mail (2.4.4)
       i18n (>= 0.4.0)

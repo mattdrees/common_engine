@@ -22,7 +22,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rails'
   gem.add_dependency 'highline'
   gem.add_dependency 'bundler'
+  gem.add_dependency 'thor'
 
-  gem.add_development_dependency "rspec"
+  gem.add_development_dependency 'rspec'
 
 end
