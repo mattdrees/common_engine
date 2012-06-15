@@ -14,7 +14,6 @@ module CommonEngine
   		class_option :lib_name, :type => :string, :default => 'common_engine'
 
   		def self.source_paths
-  			
   		end
 
   		def prepare_options
@@ -39,65 +38,65 @@ module CommonEngine
    #    end
   	# end
 
-  	def install_migrations
-  		say_status :copying, "migrations"
-        silence_stream(STDOUT) do
-          silence_warnings { rake 'railties:install:migrations' }
+    	def install_migrations
+    		say_status :copying, "migrations"
+          silence_stream(STDOUT) do
+            silence_warnings { rake 'railties:install:migrations' }
+          end
         end
-      end
-  	end
+    	end
 
-  	def create_database
-  		say_status :creating, "database"
-        silence_stream(STDOUT) do
-          silence_stream(STDERR) do
-            silence_warnings { rake 'db:create' }
+    	def create_database
+    		say_status :creating, "database"
+          silence_stream(STDOUT) do
+            silence_stream(STDERR) do
+              silence_warnings { rake 'db:create' }
+            end
+          end
+        end
+    	end
+
+    	def run_migrations
+    		if @run_migrations
+            say_status :running, "migrations"
+            quietly { rake 'db:migrate' }
+          else
+            say_status :skipping, "migrations (don't forget to run rake db:migrate)"
           end
         end
       end
-  	end
 
-  	def run_migrations
-  		if @run_migrations
-          say_status :running, "migrations"
-          quietly { rake 'db:migrate' }
-        else
-          say_status :skipping, "migrations (don't forget to run rake db:migrate)"
+      def notify_about_routes
+        insert_into_file File.join('config', 'routes.rb'), :after => "Application.routes.draw do\n" do
+          %Q{
+  # This line mounts CommonEngine's routes at the root of your application.
+  # This means, any requests to URLs such as /user, will go to 
+  # CommonEngine::UserController. If you would like to change where this engine
+  # is mounted, simply change the :at option to something different.
+  #
+  # We ask that you don't use the :as option here, as CommonEngine relies on it being
+  # the default of "common_engine"
+  mount CommonEngine::Engine, :at => '/'
+          }
+        end
+
+        unless options[:quiet]
+          puts "*" * 50
+          puts "We added the following line to your application's config/routes.rb file:"
+          puts " "
+          puts "    mount CommonEngine::Engine, :at => '/'"
         end
       end
-    end
 
-    def notify_about_routes
-      insert_into_file File.join('config', 'routes.rb'), :after => "Application.routes.draw do\n" do
-        %Q{
-# This line mounts CommonEngine's routes at the root of your application.
-# This means, any requests to URLs such as /user, will go to 
-# CommonEngine::UserController. If you would like to change where this engine
-# is mounted, simply change the :at option to something different.
-#
-# We ask that you don't use the :as option here, as CommonEngine relies on it being
-# the default of "common_engine"
-mount CommonEngine::Engine, :at => '/'
-        }
+      def complete
+        unless options[:quiet]
+          puts "*" * 50
+          puts "CommonEngine has been installed successfully. You're all ready to go!"
+          puts " "
+          puts "Enjoy!"
+        end
       end
 
-      unless options[:quiet]
-        puts "*" * 50
-        puts "We added the following line to your application's config/routes.rb file:"
-        puts " "
-        puts "    mount CommonEngine::Engine, :at => '/'"
-      end
     end
-
-    def complete
-      unless options[:quiet]
-        puts "*" * 50
-        puts "CommonEngine has been installed successfully. You're all ready to go!"
-        puts " "
-        puts "Enjoy!"
-      end
-    end
-
-
-
+  end
 end
