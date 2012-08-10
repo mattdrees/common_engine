@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["js@email, westonplatter@gmail.com"]
   gem.description   = %q{Common Engine Short}
   gem.summary       = %q{Common Engine Long}
-  gem.homepage      = "http://www.github.com/cruglobal"
+  gem.homepage      = "http://www.github.com/thelabtech/common_engine"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -16,9 +16,6 @@ Gem::Specification.new do |gem|
   gem.version       = CommonEngine::VERSION
   gem.platform      = Gem::Platform::RUBY
 
-  # gem.add_dependency "_gem_name_"
-  # gem.add_development_dependency "_gem_name_"
-  
   gem.add_dependency 'rails'
   gem.add_dependency 'highline'
   gem.add_dependency 'bundler'
