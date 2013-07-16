@@ -12,6 +12,17 @@ class SpApplication < AnswerSheet
 
     # State machine stuff
     state :started
+
+    state :phase1_complete, :enter => Proc.new {|app| 
+                                  Notifier.notification(
+                                    app.email,
+                                    Questionnaire.from_email,
+                                    "Application Started"
+                                  ).deliver if app.email.present?
+                                  app.phase1_completed = Time.now
+                                  app.previous_status = app.status
+                                }
+
     state :submitted, :enter => Proc.new {|app|
                                   # SpApplicationMailer.deliver_submitted(app)
                                   Notifier.notification(
@@ -66,8 +77,12 @@ class SpApplication < AnswerSheet
                                   app.previous_status = app.status
                                }
 
+    event :phase1_complete do 
+      transition :to => :phase1_completed, :from => :started
+    end
+
     event :submit do
-      transitions :to => :submitted, :from => :started
+      # transitions :to => :submitted, :from => :started
       transitions :to => :submitted, :from => :unsubmitted
       transitions :to => :submitted, :from => :withdrawn
       transitions :to => :submitted, :from => :ready
@@ -94,7 +109,8 @@ class SpApplication < AnswerSheet
     event :complete do
       transitions :to => :ready, :from => :submitted, :guard => :has_paid?
       transitions :to => :ready, :from => :unsubmitted, :guard => :has_paid?
-      transitions :to => :ready, :from => :started, :guard => :has_paid?
+      # transitions :to => :ready, :from => :started, :guard => :has_paid?
+      transitions :to => :ready, :from => :phase1_completed, :guard => :has_paid?
       transitions :to => :ready, :from => :withdrawn, :guard => :has_paid?
       transitions :to => :ready, :from => :declined, :guard => :has_paid?
       transitions :to => :ready, :from => :accepted_as_student_staff, :guard => :has_paid?
